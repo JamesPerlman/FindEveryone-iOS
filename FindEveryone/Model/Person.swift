@@ -11,8 +11,10 @@ import Foundation
 
 struct Person: Codable {
     let location: GeoPoint
+    let time: Timestamp
     
     enum CodingKeys: String, CodingKey {
         case location
+        case time
     }
 }

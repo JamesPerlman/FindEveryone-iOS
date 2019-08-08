@@ -11,3 +11,4 @@ import Firebase
 import Foundation
 
 extension GeoPoint: GeoPointType {}
+extension Timestamp: TimestampType {}

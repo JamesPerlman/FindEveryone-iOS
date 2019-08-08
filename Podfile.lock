@@ -119,6 +119,15 @@ PODS:
   - RxRelay (5.0.0):
     - RxSwift (~> 5)
   - RxSwift (5.0.0)
+  - RxSwiftExt (5.0.0):
+    - RxSwiftExt/Core (= 5.0.0)
+    - RxSwiftExt/RxCocoa (= 5.0.0)
+  - RxSwiftExt/Core (5.0.0):
+    - RxSwift (~> 5.0)
+  - RxSwiftExt/RxCocoa (5.0.0):
+    - RxCocoa (~> 5.0)
+    - RxSwiftExt/Core
+  - SwiftKeychainWrapper (3.4.0)
 
 DEPENDENCIES:
   - CodableFirebase
@@ -130,6 +139,8 @@ DEPENDENCIES:
   - RxCoreLocation (~> 1.4)
   - RxMKMapView (~> 5.0)
   - RxSwift (~> 5.0)
+  - RxSwiftExt (~> 5)
+  - SwiftKeychainWrapper (~> 3.4.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -155,6 +166,8 @@ SPEC REPOS:
     - RxMKMapView
     - RxRelay
     - RxSwift
+    - RxSwiftExt
+    - SwiftKeychainWrapper
 
 SPEC CHECKSUMS:
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
@@ -179,7 +192,9 @@ SPEC CHECKSUMS:
   RxMKMapView: 7b19fc545887314851ea67b12193bc8c6004dcb5
   RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
+  RxSwiftExt: 4564187392cc53823ef241fa4a11647861567026
+  SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
 
-PODFILE CHECKSUM: aac5dadc7b453fa17f734a6f3a35419785071669
+PODFILE CHECKSUM: 577e30e2390f6993d0b167759423466d54f62d6b
 
 COCOAPODS: 1.7.5

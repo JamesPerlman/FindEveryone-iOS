@@ -15,7 +15,6 @@
 		F41486D422F9332000D081D6 /* CLAuthorizationStatus+isAuthorized.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41486D322F9332000D081D6 /* CLAuthorizationStatus+isAuthorized.swift */; };
 		F41486D622F93D3B00D081D6 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41486D522F93D3B00D081D6 /* AuthenticationService.swift */; };
 		F41486D822F9421C00D081D6 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41486D722F9421C00D081D6 /* FirebaseService.swift */; };
-		F41486DA22F945A000D081D6 /* Observable+notNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41486D922F945A000D081D6 /* Observable+notNil.swift */; };
 		F41486DD22F9506000D081D6 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41486DC22F9506000D081D6 /* Person.swift */; };
 		F49D0C0922F90CB700CA3067 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49D0C0822F90CB700CA3067 /* AppDelegate.swift */; };
 		F49D0C0B22F90CB700CA3067 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49D0C0A22F90CB700CA3067 /* MapViewController.swift */; };
@@ -62,7 +61,6 @@
 		F41486D322F9332000D081D6 /* CLAuthorizationStatus+isAuthorized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLAuthorizationStatus+isAuthorized.swift"; sourceTree = "<group>"; };
 		F41486D522F93D3B00D081D6 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		F41486D722F9421C00D081D6 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
-		F41486D922F945A000D081D6 /* Observable+notNil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+notNil.swift"; sourceTree = "<group>"; };
 		F41486DC22F9506000D081D6 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		F49D0C0522F90CB700CA3067 /* FindEveryone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindEveryone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F49D0C0822F90CB700CA3067 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -156,7 +154,6 @@
 			isa = PBXGroup;
 			children = (
 				F41486D322F9332000D081D6 /* CLAuthorizationStatus+isAuthorized.swift */,
-				F41486D922F945A000D081D6 /* Observable+notNil.swift */,
 				F40385BC22F9F3A500FC0F5C /* CLLocationCoordinate2D+GeoPoint.swift */,
 				F40385BE22FA41CA00FC0F5C /* Firebase+Codable.swift */,
 			);
@@ -466,7 +463,6 @@
 				F40385BD22F9F3A500FC0F5C /* CLLocationCoordinate2D+GeoPoint.swift in Sources */,
 				F40385BF22FA41CA00FC0F5C /* Firebase+Codable.swift in Sources */,
 				F41486DD22F9506000D081D6 /* Person.swift in Sources */,
-				F41486DA22F945A000D081D6 /* Observable+notNil.swift in Sources */,
 				F4F7046A22F928820009CFA8 /* LocationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -646,6 +642,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6NK34BJQZ4;
 				INFOPLIST_FILE = FindEveryone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -665,6 +662,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6NK34BJQZ4;
 				INFOPLIST_FILE = FindEveryone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -15,6 +15,9 @@ target 'FindEveryone' do
   pod 'RxCoreLocation', '~> 1.4'
   pod 'RxMKMapView', '~> 5.0'
   pod 'RxSwift', '~> 5.0'
+  pod 'RxSwiftExt', '~> 5'
+  
+  pod 'SwiftKeychainWrapper', '~> 3.4.0'
 
   target 'FindEveryoneTests' do
     inherit! :search_paths

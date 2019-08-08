@@ -13,6 +13,7 @@ import FirebaseFirestore
 import Foundation
 import RxRelay
 import RxSwift
+import RxSwiftExt
 
 class FirebaseService {
     
@@ -31,23 +32,43 @@ class FirebaseService {
         self.locationService = locationService
         
         // auth service uid creates new user (if one doesn't already exist)
-        let uid = authService
-            .uid
+        let token = authService
+            .token
             .asObservable()
-            .notNil()
             .share(replay: 1, scope: .whileConnected)
         
         let myCoords = locationService
             .location
             .asObservable()
-            .notNil()
+            .unwrap()
             .share(replay: 1, scope: .whileConnected)
         
-        // update my person model when uid or location changes
+        // stream describing token only if token is nil AND token not changing from nil to String
+        let tokenChange = token
+            .startWith(nil)
+            .pairwise()
+            .filter({ prevToken, token in
+                (prevToken == nil && token == nil)
+                || (prevToken != nil && token != nil)
+            })
+            .map({ _, token in
+                token
+            })
+        
+        // first token triggers createOrUpdatePerson
+        token
+            .take(1)
+            .withLatestFrom(myCoords, resultSelector: { ($0, $1) })
+            .subscribe(onNext: { [weak self] (token, coords) in
+                self?.createOrUpdatePerson(token, coords)
+            })
+            .disposed(by: rxBag)
+        
+        // update my person model when location changes
         Observable
-            .combineLatest(uid, myCoords)
-            .subscribe(onNext: { [weak self] (uid, coords) in
-                self?.updatePerson(uid, coords)
+            .combineLatest(tokenChange, myCoords)
+            .subscribe(onNext: { [weak self] (token, coords) in
+                self?.createOrUpdatePerson(token, coords)
             })
             .disposed(by: rxBag)
         
@@ -61,8 +82,7 @@ class FirebaseService {
                 }
                 let everyone = snapshot.documents
                     .map({ document -> Person? in
-                        var data = document.data()
-                        return try? self?.firestoreDecoder.decode(Person.self, from: data)
+                        return try? self?.firestoreDecoder.decode(Person.self, from: document.data())
                     })
                     .compactMap({ $0 })
                 
@@ -70,12 +90,47 @@ class FirebaseService {
         }
     }
     
-    func updatePerson(_ uid: String, _ coords: CLLocationCoordinate2D) {
+    func createOrUpdatePerson(_ token: String?, _ coords: CLLocationCoordinate2D) {
+        if let token = token {
+            updatePerson(token, coords)
+        } else {
+            createPerson(coords)
+        }
+    }
+    
+    func createPerson(_ coords: CLLocationCoordinate2D) {
+        let person = firestore
+            .collection("everyone")
+            .document()
+        
+        let myData = getMyDataDict(coords: coords)
+            
+        person
+            .setData(myData, completion: { [weak self] (error) in
+                guard let sself = self, error == nil else {
+                    print("Unable to set data for newly created person.  \(error?.localizedDescription ?? "No error.")")
+                    return
+                }
+                sself.personExists.accept(error == nil)
+                sself.authService.setToken(person.documentID)
+            })
+    }
+    
+    func updatePerson(_ token: String, _ coords: CLLocationCoordinate2D) {
+        let myData = getMyDataDict(coords: coords)
+        
         firestore
             .collection("everyone")
-            .document(uid)
-            .setData([ "location" : GeoPoint(coords) ], completion: { [weak self] (error) in
+            .document(token)
+            .setData(myData, completion: { [weak self] (error) in
                 self?.personExists.accept(error == nil)
             })
+    }
+    
+    private func getMyDataDict(coords: CLLocationCoordinate2D) -> [String : Any] {
+        return [
+            "location" : GeoPoint(coords),
+            "time" : Timestamp(date: Date())
+        ]
     }
 }
